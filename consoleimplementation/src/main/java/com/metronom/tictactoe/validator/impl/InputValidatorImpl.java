@@ -13,41 +13,41 @@ public class InputValidatorImpl implements InputValidator {
 
     @Override
     public void validatePlayerInput(String input) throws BadInputException {
-	if (!isValidInput(MOVE_INPUT_PATTERN, input)) {
-	    throw new BadInputException(INVALID_INPUT_ERROR_MSG);
-	}
+        if (isInputInvalid(MOVE_INPUT_PATTERN, input)) {
+            throw new BadInputException(INVALID_INPUT_ERROR_MSG);
+        }
     }
 
     @Override
     public void validatePlayersIds(char... players) throws InitializationException {
-	char p1 = players[0];
-	char p2 = players[1];
-	char p3 = players[2];
+        char p1 = players[0];
+        char p2 = players[1];
+        char p3 = players[2];
 
-	if (Character.compare(p1, p2) == 0) {
-	    String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p1);
-	    throw new InitializationException(msg);
-	}
-	if (Character.compare(p1, p3) == 0) {
-	    String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p1);
-	    throw new InitializationException(msg);
-	}
-	if (Character.compare(p2, p3) == 0) {
-	    String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p2);
-	    throw new InitializationException(msg);
-	}
+        if (p1 == p2) {
+            String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p1);
+            throw new InitializationException(msg);
+        }
+        if (p1 == p3) {
+            String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p1);
+            throw new InitializationException(msg);
+        }
+        if (p2 == p3) {
+            String msg = String.format(INVALID_PLAYER_ID_ERROR_MSG, p2);
+            throw new InitializationException(msg);
+        }
     }
 
     @Override
     public void validateBoardSize(String size) throws InitializationException {
-	if (!isValidInput(BOARD_SIZE_PATTERN, size)) {
-	    throw new InitializationException(INVALID_BOARD_SIZE_ERROR_MSG);
-	}
+        if (isInputInvalid(BOARD_SIZE_PATTERN, size)) {
+            throw new InitializationException(INVALID_BOARD_SIZE_ERROR_MSG);
+        }
     }
 
-    private boolean isValidInput(String sPattern, String input) {
-	Pattern pattern = Pattern.compile(sPattern);
-	return pattern.matcher(input).matches();
+    private boolean isInputInvalid(String sPattern, String input) {
+        Pattern pattern = Pattern.compile(sPattern);
+        return !pattern.matcher(input).matches();
     }
 
 }

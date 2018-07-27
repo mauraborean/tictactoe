@@ -14,9 +14,9 @@ import com.metronom.tictactoe.writer.Writer;
 
 public class PlayersLoaderImpl implements PlayersLoader {
 
-    public static final String PLAYER_1 = "humanPlayer1.id";
-    public static final String PLAYER_2 = "humanPlayer2.id";
-    public static final String PLAYER_3 = "computerPlayer.id";
+    private static final String PLAYER_1 = "humanPlayer1.id";
+	private static final String PLAYER_2 = "humanPlayer2.id";
+	private static final String PLAYER_3 = "computerPlayer.id";
 
     private ConfigurationReader configurationReader;
     private InputValidator inputValidator;
@@ -45,7 +45,7 @@ public class PlayersLoaderImpl implements PlayersLoader {
 
 	Collections.shuffle(players);
 
-	return players.toArray(new Player[players.size()]);
+	return players.toArray(new Player[0]);
     }
 
 }

@@ -23,7 +23,7 @@ public enum Status {
 
     private String msg;
 
-    private Status(String msg) {
+    Status(String msg) {
 	this.msg = msg;
     }
 

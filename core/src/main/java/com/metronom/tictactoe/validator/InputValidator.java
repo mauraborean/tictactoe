@@ -32,7 +32,7 @@ public interface InputValidator {
      * Checks if the players id's are valid.
      * 
      * @param playerIds a char array with the id's to validate
-     * @throws InitializationExceptionif the id's are not valid
+     * @throws InitializationException if the id's are not valid
      */
     void validatePlayersIds(char... playerIds) throws InitializationException;
 

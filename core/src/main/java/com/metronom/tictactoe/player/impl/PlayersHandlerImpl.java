@@ -58,7 +58,7 @@ public class PlayersHandlerImpl implements PlayersHandler {
 
     @Override
     public void refreshPlayerBoard(Board board) {
-	getPlayer().refreshBoard(board);
+	getPlayer().refreshBoard(board.getCopy());
     }
 
     private Player getPlayer() {

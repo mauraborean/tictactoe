@@ -72,13 +72,8 @@ public class Move {
 	    return false;
 	}
 	if (player == null) {
-	    if (other.player != null) {
-		return false;
-	    }
-	} else if (!player.equals(other.player)) {
-	    return false;
+		return other.player == null;
+	} else return player.equals(other.player);
 	}
-	return true;
-    }
 
 }

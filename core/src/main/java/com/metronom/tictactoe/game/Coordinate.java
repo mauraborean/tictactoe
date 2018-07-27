@@ -15,8 +15,8 @@ public class Coordinate {
     /**
      * Constructor with the coordinate's values
      * 
-     * @param x
-     * @param y
+     * @param x int value
+     * @param y int value
      */
     public Coordinate(int x, int y) {
 	super();
@@ -52,10 +52,7 @@ public class Coordinate {
 	if (c.x != this.x) {
 	    return false;
 	}
-	if (c.y != this.y) {
-	    return false;
+		return c.y == this.y;
 	}
-	return true;
-    }
 
 }

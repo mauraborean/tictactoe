@@ -85,14 +85,14 @@ public class Board {
     }
 
     private void checkValidValues(int x, int y) throws BadInputException {
-	if (!isNumberBetweenValues(x, -1, getSize()) || !isNumberBetweenValues(y, -1, getSize())) {
-	    String errMsg = String.format(BAD_INPUT_ERROR_MSG, getSize() - 1, x, y);
+	if (isNumberOutsideBoundaries(x, getSize()) || isNumberOutsideBoundaries(y, getSize())) {
+	    String errMsg = String.format(BAD_INPUT_ERROR_MSG, getSize() - 1);
 	    throw new BadInputException(errMsg);
 	}
     }
 
-    private boolean isNumberBetweenValues(int number, int min, int max) {
-	return number > min && number < max;
+    private boolean isNumberOutsideBoundaries(int number, int max) {
+	return number <= -1 || number >= max;
     }
 
     private void checkFreeMove(int x, int y) throws BadInputException {

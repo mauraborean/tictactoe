@@ -16,7 +16,7 @@ public abstract class PlayException extends RuntimeException {
      * 
      * @param msg a String with the exception description
      */
-    public PlayException(String msg) {
+    PlayException(String msg) {
 	super(msg);
     }
 

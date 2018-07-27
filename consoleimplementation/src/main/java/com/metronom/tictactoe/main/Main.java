@@ -40,64 +40,64 @@ public class Main {
     private static final String PATH = "configuration.properties";
 
     public static void main(String[] args) {
-	new Main().execute();
+        new Main().execute();
     }
 
-    public void execute() {
-	Writer writer = new ConsoleWriter();
+    private void execute() {
+        Writer writer = new ConsoleWriter();
 
-	try {
-	    printGameBanner(writer);
+        try {
+            printGameBanner(writer);
 
-	    InputValidator inputValidator = new InputValidatorImpl();
-	    ConfigurationReader configurationReader = new ConfigurationReaderImpl(inputValidator, getProperties());
+            InputValidator inputValidator = new InputValidatorImpl();
+            ConfigurationReader configurationReader = new ConfigurationReaderImpl(inputValidator, getProperties());
 
-	    List<WinCondition> winConditions = new ArrayList<>();
-	    winConditions.add(new VerticalWinCondition());
-	    winConditions.add(new HorizontalWinCondition());
-	    winConditions.add(new Diagonal1WinCondition());
-	    winConditions.add(new Diagonal2WinCondition());
+            List<WinCondition> winConditions = new ArrayList<>();
+            winConditions.add(new VerticalWinCondition());
+            winConditions.add(new HorizontalWinCondition());
+            winConditions.add(new Diagonal1WinCondition());
+            winConditions.add(new Diagonal2WinCondition());
 
-	    WinConditionHandler winCondition = new WinConditionHandlerImpl(winConditions);
+            WinConditionHandler winCondition = new WinConditionHandlerImpl(winConditions);
 
-	    GameOverCondition gameOverCondition = new GameOverConditionImpl();
+            GameOverCondition gameOverCondition = new GameOverConditionImpl();
 
-	    InputReader inputReader = new HumanPlayerInputReaderImpl();
-	    InputHandler inputHandler = new InputHandlerImpl(inputReader, inputValidator);
-	    PlayersLoader playerLoader = new PlayersLoaderImpl(configurationReader, inputValidator, inputHandler, writer);
-	    PlayersHandler playerHandler = new PlayersHandlerImpl(playerLoader, writer);
+            InputReader inputReader = new HumanPlayerInputReaderImpl();
+            InputHandler inputHandler = new InputHandlerImpl(inputReader, inputValidator);
+            PlayersLoader playerLoader = new PlayersLoaderImpl(configurationReader, inputValidator, inputHandler, writer);
+            PlayersHandler playerHandler = new PlayersHandlerImpl(playerLoader, writer);
 
-	    Game game = new GameImpl(configurationReader, winCondition, gameOverCondition, playerHandler, writer);
-	    game.run();
-	} catch (InitializationException e) {
-	    writer.writeErrorMessage(e.getMessage());
-	} catch (RuntimeException e) {
-	    writer.writeErrorMessage(UNEXPECTED_ERROR_MSG);
-	}
+            Game game = new GameImpl(configurationReader, winCondition, gameOverCondition, playerHandler, writer);
+            game.run();
+        } catch (InitializationException e) {
+            writer.writeErrorMessage(e.getMessage());
+        } catch (RuntimeException e) {
+            writer.writeErrorMessage(UNEXPECTED_ERROR_MSG);
+        }
     }
 
     private void printGameBanner(Writer writer) {
-	String banner = "\r\n" + " _______  ___   _______         _______  _______  _______         _______  _______  _______ \r\n"
-		+ "|       ||   | |       |       |       ||   _   ||       |       |       ||       ||       |\r\n"
-		+ "|_     _||   | |       | ____  |_     _||  |_|  ||       | ____  |_     _||   _   ||    ___|\r\n"
-		+ "  |   |  |   | |       ||____|   |   |  |       ||       ||____|   |   |  |  | |  ||   |___ \r\n"
-		+ "  |   |  |   | |      _|         |   |  |       ||      _|         |   |  |  |_|  ||    ___|\r\n"
-		+ "  |   |  |   | |     |_          |   |  |   _   ||     |_          |   |  |       ||   |___ \r\n"
-		+ "  |___|  |___| |_______|         |___|  |__| |__||_______|         |___|  |_______||_______|\r\n" + "";
+        String banner = "\r\n" + " _______  ___   _______         _______  _______  _______         _______  _______  _______ \r\n"
+                + "|       ||   | |       |       |       ||   _   ||       |       |       ||       ||       |\r\n"
+                + "|_     _||   | |       | ____  |_     _||  |_|  ||       | ____  |_     _||   _   ||    ___|\r\n"
+                + "  |   |  |   | |       ||____|   |   |  |       ||       ||____|   |   |  |  | |  ||   |___ \r\n"
+                + "  |   |  |   | |      _|         |   |  |       ||      _|         |   |  |  |_|  ||    ___|\r\n"
+                + "  |   |  |   | |     |_          |   |  |   _   ||     |_          |   |  |       ||   |___ \r\n"
+                + "  |___|  |___| |_______|         |___|  |__| |__||_______|         |___|  |_______||_______|\r\n" + "";
 
-	writer.writeInfoMessage(banner);
+        writer.writeInfoMessage(banner);
     }
 
     private Properties getProperties() {
-	Properties properties = new Properties();
-	try {
-	    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-	    InputStream input = classLoader.getResourceAsStream(PATH);
-	    properties.load(input);
-	} catch (IOException e) {
-	    throw new InitializationException(String.format(CONFIGURATION_FILE_ERROR_MSG, e.getMessage()));
-	}
-	return properties;
+        Properties properties = new Properties();
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream(PATH);
+            properties.load(input);
+        } catch (IOException e) {
+            throw new InitializationException(String.format(CONFIGURATION_FILE_ERROR_MSG, e.getMessage()));
+        }
+        return properties;
     }
 
 }
