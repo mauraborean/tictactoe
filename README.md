@@ -3,7 +3,7 @@
 ## Getting Started
 This project was developed using Test Driven Development (TDD). The project is divided in two modules that represents the core and the implementation of the game. The *core* contains all the classes and interfaces necessary to create a *TicTacToe* game, and in the implementation module are all the classes needed to create a console delivery of the *2.0* version.
 
-Some of the design patterns used in the development of the projects are: Dependency injection, Strategy and Adapter.
+Some of the design patterns used in the development of the projects are: Dependency injection, Strategy and Template.
  
 The following instructions will allow you to install and play the Tic Tac Toe 2.0 on your computer.
 
