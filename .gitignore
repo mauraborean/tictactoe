@@ -1,0 +1,9 @@
+.classpath
+.project
+.idea/
+.settings/
+consoleimplementation/doc/
+consoleimplementation/target/
+consoleimplementation/test-output/
+core/target/
+core/test-output/
